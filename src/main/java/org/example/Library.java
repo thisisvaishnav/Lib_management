@@ -37,15 +37,17 @@ public class Library {
         }
     }
     // Method to return a book
-    public void returnBook(String bookName, Students student) {
-        // Check if the student has borrowed the book
+    public void returnBook(String bookName, Students student, LocalDate returnDate) {
         List<BorrowedBook> borrowedBooks = student.getBorrowedBooks();
         boolean found = false;
         for (BorrowedBook borrowedBook : borrowedBooks) {
             if (borrowedBook.getBookName().equals(bookName)) {
-                // Return the book by removing it from the student's borrowed list
+                int lateFee = borrowedBook.calculateLateFee(returnDate);
+                if (lateFee > 0) {
+                    System.out.println("Late fee charged: " + lateFee);
+                }
                 borrowedBooks.remove(borrowedBook);
-                availableBooks.add(bookName);  // Add back to available books
+                availableBooks.add(bookName);
                 System.out.println(student.getName() + " Book returned successfully!");
                 found = true;
                 break;
@@ -55,4 +57,5 @@ public class Library {
             System.out.println("This book was not borrowed by the student.");
         }
     }
+
 }

@@ -1,3 +1,5 @@
+package org.example;
+
 import org.example.Library;
 import org.example.Students;
 
@@ -65,14 +67,15 @@ public class Main {
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate borrowDate = LocalDate.parse("12-12-2025", formatter);
+        LocalDate borrowDate = LocalDate.of(2025, 4, 1);
+        LocalDate returnDate = LocalDate.of(2025, 6, 10);
 
 
-        svhlibrary.borrowBook("1984", student1, borrowDate);  // Corrected this line
-        svhlibrary.borrowBook("The Catcher in the Rye", student2, borrowDate) ; // Added borrow date
+        svhlibrary.borrowBook("1984", student1, borrowDate);
+        svhlibrary.borrowBook("The Catcher in the Rye", student2, borrowDate) ;
 
         // Return books
-        svhlibrary.returnBook("1984", student1);
-        svhlibrary.returnBook("The Catcher in the Rye", student2);
+        svhlibrary.returnBook("1984", student1, returnDate );
+        svhlibrary.returnBook("The Catcher in the Rye", student2, returnDate);
     }
 }
